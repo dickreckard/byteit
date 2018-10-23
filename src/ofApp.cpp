@@ -12,7 +12,7 @@ void ofApp::setup()
 {
     ofSetFrameRate(30);
 
-    ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_SILENT);
 
     // Load test text.
     ipsum = ofBufferFromFile("media/ipsum.txt").getText();
@@ -29,25 +29,20 @@ void ofApp::setup()
 
 
     // Register RPC methods.
-    server.registerMethod("get-text",
-                          "Returns a random chunk of text to the client.",
-                          this,
-                          &ofApp::getText);
+    server.registerMethod("get-text","Returns a random chunk of text to the client.",this, &ofApp::getText);
 
-    server.registerMethod("set-text",
-                          "Sets text from the user.",
-                          this,
-                          &ofApp::setText);
+    server.registerMethod("set-text", "Sets text from the user.", this, &ofApp::setText);
 
-    server.registerMethod("ping",
-                          "Send a JSONRPC Ping Notification",
-                          this,
-                          &ofApp::ping);
+    server.registerMethod("ping","Send a JSONRPC Ping Notification", this, &ofApp::ping);
 
-    server.registerMethod("pong",
-                          "Send a JSONRPC Pong Notification",
-                          this,
-                          &ofApp::pong);
+    server.registerMethod("pong", "Send a JSONRPC Pong Notification", this, &ofApp::pong);
+    
+    server.registerMethod("getSurveyAnswers", "Receive Survey Answers", this, &ofApp::getSurveyAnswers);
+    
+    server.registerMethod("setSurveyQuestion", "Change question for audience", this, &ofApp::setSurveyQuestion);
+
+    
+    
 
     // Start the server.
     server.start();
@@ -71,7 +66,11 @@ void ofApp::draw()
                                 ofColor(255, fader));
 }
 
+void ofApp::getSurveyAnswers(ofx::JSONRPC::MethodArgs& args){
+    
+    cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
 
+}
 void ofApp::exit()
 {
     // Set the logger back to the default to make sure any
@@ -80,23 +79,22 @@ void ofApp::exit()
 }
 
 
-void ofApp::_keyPressed(int _key){
-    if (_key == '0'){
-        setUserText("0");
-    }
-    if (_key == '1'){
-        setUserText("1");
-    }
-    if (_key == '2'){
-        setUserText("2");
-    } 
-    else if (_key == '3'){
-        setUserText("3");
-    }
-}
-
 void ofApp::keyPressed(int key){
-  _keyPressed(key);
+    
+    switch (key) {
+        case '0':
+            setUserText("0");
+            break;
+        case '1':
+            setUserText("1");
+            break;
+        case '2':
+            setUserText("2");
+            break;
+        case '3':
+            setUserText("3");
+            break;
+    }
 }
 
 
@@ -126,6 +124,8 @@ void ofApp::getText(ofx::JSONRPC::MethodArgs& args)
           args.result = userText;
     }
     ofLogVerbose("ofApp::getText") << args.result.dump(4);
+    cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
+
 }
 
 
