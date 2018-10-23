@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<!-- Force latest IE rendering engine or ChromeFrame if installed -->
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+<meta charset="utf-8">
+<title>ofx::HTTP::BasicJSONRPCServer</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="img/favicon.ico">
+<!-- Bootstrap styles -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!-- FontAwesome -->
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!-- Syntax highlighting. -->
+<link rel="stylesheet" href="css/prism.css">
+<!-- Generic page styles -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!--     <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ofx::HTTP::BasicJSONRPCServer Demo</a>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="container" id="cont">
+        <h1>Yo! Some questions.</h1>
+        <br>
+        <div class="panel panel-default hide">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <strong>Send Text to the Server (Look for your red and yellow text in the app window)</strong>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                  <input id="text-to-send" type="text" class="form-control">
+                  <span class="input-group-btn">
+                    <button id="set-text" class="btn btn-default" type="button">Send</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default hide">
+            <div class="panel-body">
+                <div class="pull-left">
+                    <strong>Get Text from the Server</strong>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="input-group">
+                  <input id="currentquestion" type="text" class="form-control">
+                  <span class="input-group-btn">
+                    <button id="get-text" class="btn btn-default" type="button">Receive</button>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.jsonrpcclient.js"></script>
+    <script src="./js/jquery.json.js"></script>
+    <script src="./js/prism.js"></script>
+    <script src="./js/ofxUtils.js"></script>
+    <script src="./js/main.js"></script>
+	<script>
+		$('#currentquestion').val('0');
+		arrayq=["0","1","2","3"];
+		userid="+4161231231";
+
+		function createForm(json){
+			$(".question").remove();
+
+			qn=json.questionNumber;
+			tt=json.mainText;
+			op=json.options;
+			qid="question"+qn;
+
+			$('.container').append(
+				$("<form/>").attr({"id":qid,"name":qid,'class':'question'})
+					.append($("<legend/>").attr({'class':'maintext'}).html(tt))
+			);
+			jqid= $('[name='+qid+']');
+			$.each(op, function (i, opt) {
+				var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
+				var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
+			    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
+			});
+			jqid.wrapInner('<fieldset />');
+
+			$('input[type=radio][name=opt'+qn+']').change(function() {
+				sendAnswer(jsonAnswer(userid,qn,this.value));
+			});
+		}
+
+		setInterval(function() {
+        JSONRPCClient.call('get-text',
+        	$('#currentquestion').val(),
+            function(result) {
+            	if( result &&  inArray(result, arrayq)){ 
+            		if ( result != $('#currentquestion').val() ){
+            			createForm(questions[result]);
+	            		$('#currentquestion').val(result);
+	            	}
+            	} 
+            },
+            function(error) {
+                addError(error);
+            });
+    	}, 1000);
+
+	$( document ).ready(function() {
+		$.getJSON("js/questions.json", function(json) {
+    		questions=json;
+		    createForm(questions[0]);
+		});
+	});
+
+	function inArray(value, array) {
+	  return array.indexOf(value) > -1;
+	}
+
+	function jsonAnswer(userid,question,answer){
+		var json = new Object();
+		json.userid = userid;
+		json.question = question;
+		json.answer = answer;
+		return JSON.stringify(json);
+	}
+
+	function sendAnswer(jsonstring){
+		JSONRPCClient.call('set-text',
+    	jsonstring,
+        function(result) {},
+        function(error) {
+            addError(error);
+        });
+	}
+
+
+	</script>
+
+</body>
+</html>
