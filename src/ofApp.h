@@ -26,22 +26,8 @@ public:
     void getSurveyAnswers(ofx::JSONRPC::MethodArgs& args);
     void setSurveyQuestion(ofx::JSONRPC::MethodArgs& args);
 
-    // Register a no-argument notification method.
-    void ping();
-
-    // Register a no-argument notification method.
-    void pong();
-
-    /// \todo is ofSoundPlayer thread-safe?
-    ofSoundPlayer pingPlayer;
-    ofSoundPlayer pongPlayer;
-
     /// \brief The server that handles the JSONRPC requests.
     ofx::HTTP::JSONRPCServer server;
-
-    /// \brief Get a snippet of random text in a thread-safe way.
-    /// \returns The snippet of random text.
-    std::string getRandomText() const;
 
     /// \brief Get the user text in a thread-safe way.
     /// \returns The user text.
@@ -54,10 +40,6 @@ public:
 private:
     // A custom logging channel to mirror all log messages to the web clients.
     // WebSocketLoggerChannel::SharedPtr loggerChannel;
-
-    // This piece of text might be modified by multiple client threads.
-    // Thus we must use a mutex to protect it during multi-threaded access.
-    std::string ipsum;
 
     // This piece of text might be modified by multiple client threads.
     // Thus we must use a mutex to protect it during multi-threaded access.
