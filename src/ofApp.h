@@ -18,12 +18,13 @@ public:
     void setup() override;
     void draw() override;
     void exit() override;
-    void _keyPressed(int _key);
     void keyPressed(int key);
 
     // Registered methods.
     void getText(ofx::JSONRPC::MethodArgs& args);
     void setText(ofx::JSONRPC::MethodArgs& args);
+    void getSurveyAnswers(ofx::JSONRPC::MethodArgs& args);
+    void setSurveyQuestion(ofx::JSONRPC::MethodArgs& args);
 
     // Register a no-argument notification method.
     void ping();
