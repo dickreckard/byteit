@@ -1,4 +1,4 @@
-[
+{   "questions" : [
     { 
         "questionNumber": 0,
         "mainText": "This is the empty question",
@@ -71,4 +71,14 @@
             }
         ]
     }
-]
+],
+"pages":{
+    "start":{
+        "title":"Welcome to the start of the test.",
+        "content":"Just the start of a test."
+    },
+    "white":{},
+    "black":{},
+    "image":{}
+}
+}

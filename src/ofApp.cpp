@@ -73,16 +73,16 @@ void ofApp::keyPressed(int key){
     
     switch (key) {
         case '0':
-            setUserText("0");
+            setUserText("question,0");
             break;
         case '1':
-            setUserText("1");
+            setUserText("question,1");
             break;
         case '2':
-            setUserText("2");
+            setUserText("question,2");
             break;
         case '3':
-            setUserText("3");
+            setUserText("question,3");
             break;
         case '4':
             setUserText("black");
@@ -92,6 +92,9 @@ void ofApp::keyPressed(int key){
             break;
         case '6':
             setUserText("start");
+            break;
+        case '7':
+            setUserText("image,/img/cat.gif");
             break;
     }
 }

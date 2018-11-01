@@ -27,8 +27,13 @@
     </div> -->
 
     <div class="container" id="cont">
-        <h1>Yo! Some questions.</h1>
+        <h1 id="title"></h1>
+        <p class="maintext" id="context">
+        </p>
+        <div id="questionspace">
+        </div>
         <br>
+
         <div class="panel panel-default hide">
             <div class="panel-body">
                 <div class="pull-left">
@@ -75,15 +80,82 @@
 		arrayq=["0","1","2","3"];
 		userid="+4161231231";
 
-		function createForm(json){
-			$(".question").remove();
+        function callPages(page,extra){
+            if ( page.startsWith("question,")) {
+                extra=page.split(',')[1];
+                page='question';
+            }
+            if ( page.startsWith("image,")) {
+                extra=page.split(',')[1];
+                page='image';
+            }
+            switch (page)
+            {
+                case 'question':
+                    createForm(extra);
+                break;
+                case 'start':
+                    createStart();
+                break;
+                case 'white':
+                    createWhite()   
+                break;
+                case 'black':
+                    createBlack();
+                break;
+                case 'image':
+                    createImage(extra);
+                break;
+                default:
+            }
+        }
+        
+        function createStart(){
+            $("#context").html(pages.start.content);
+            $("#title").html(pages.start.title);
+            $("#questionspace").empty();
+            $('body').css('background-color','transparent');
+        }
 
+        function createBlack(){
+            $("#context").html('');
+            $("#title").html('');
+            $("#questionspace").empty();
+            $('body').css('background-color','black');
+        }
+
+        function createWhite(){
+            $("#context").html('');
+            $("#title").html('');
+            $("#questionspace").empty();
+            $('body').css('background-color','white');
+        }
+
+        function createImage(url){
+            url=url||'img/error.jpg';
+            $("#context").html('');
+            $("#title").html('');
+            $("#questionspace").empty();
+            $('body').css('background-color','black');
+            $("#questionspace").append(
+                $('<img>').attr({id:'imago',class:'bigimage',src:url})
+            );
+            $('#imago').on( 'error', function(){ $(this).attr('src','img/error.jpg');});
+        }
+
+		function createForm(questnum){
+            $('body').css('background-color','transparent');
+            $("#context").html('');
+            $("#title").html('');
+			$("#questionspace").empty();
+            num=String(questnum);
+            json=questions[num];
 			qn=json.questionNumber;
 			tt=json.mainText;
 			op=json.options;
 			qid="question"+qn;
 
-			$('.container').append(
+			$('#questionspace').append(
 				$("<form/>").attr({"id":qid,"name":qid,'class':'question'})
 					.append($("<legend/>").attr({'class':'maintext'}).html(tt))
 			);
@@ -104,9 +176,10 @@
         JSONRPCClient.call('get-text',
         	$('#currentquestion').val(),
             function(result) {
-            	if( result &&  inArray(result, arrayq)){ 
+            	if( result ){ 
             		if ( result != $('#currentquestion').val() ){
-            			createForm(questions[result]);
+                        console.log('new instruction: ',result);
+            			callPages(result);
 	            		$('#currentquestion').val(result);
 	            	}
             	} 
@@ -118,8 +191,9 @@
 
 	$( document ).ready(function() {
 		$.getJSON("js/questions.json", function(json) {
-    		questions=json;
-		    createForm(questions[0]);
+    		questions=json.questions;
+            pages=json.pages;
+            createStart();
 		});
 	});
 
