@@ -115,9 +115,9 @@ void ofApp::getText(ofx::JSONRPC::MethodArgs& args)
 
 void ofApp::setText(ofx::JSONRPC::MethodArgs& args)
 {
-
   // here the answer will be saved to json.
     ofLogVerbose("ofApp::setText") << args.params.dump(4);
+    std::cout << "received: " << args.params.dump(4) << endl;
 }
 
 
