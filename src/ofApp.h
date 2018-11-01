@@ -24,7 +24,7 @@ public:
     void getText(ofx::JSONRPC::MethodArgs& args);
     void setText(ofx::JSONRPC::MethodArgs& args);
     void getSurveyAnswers(ofx::JSONRPC::MethodArgs& args);
-    void setSurveyQuestion(ofx::JSONRPC::MethodArgs& args);
+    void setSurveyPage(ofx::JSONRPC::MethodArgs& args);
 
     /// \brief The server that handles the JSONRPC requests.
     ofx::HTTP::JSONRPCServer server;

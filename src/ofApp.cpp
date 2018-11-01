@@ -26,7 +26,7 @@ void ofApp::setup()
     
     server.registerMethod("getSurveyAnswers", "Receive Survey Answers", this, &ofApp::getSurveyAnswers);
     
-    server.registerMethod("setSurveyQuestion", "Change question for audience", this, &ofApp::setSurveyQuestion);
+    server.registerMethod("setSurveyPage", "Change question for audience", this, &ofApp::setSurveyPage);
     // Start the server.
     server.start();
 
@@ -55,7 +55,7 @@ void ofApp::getSurveyAnswers(ofx::JSONRPC::MethodArgs& args){
 
 }
 
-void ofApp::setSurveyQuestion(ofx::JSONRPC::MethodArgs& args){
+void ofApp::setSurveyPage(ofx::JSONRPC::MethodArgs& args){
     
     cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
     
@@ -84,6 +84,15 @@ void ofApp::keyPressed(int key){
         case '3':
             setUserText("3");
             break;
+        case '4':
+            setUserText("black");
+            break;
+        case '5':
+            setUserText("white");
+            break;
+        case '6':
+            setUserText("start");
+            break;
     }
 }
 
@@ -96,7 +105,7 @@ void ofApp::getText(ofx::JSONRPC::MethodArgs& args)
           args.result = userText;
     }
     ofLogVerbose("ofApp::getText") << args.result.dump(4);
-    cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
+    //cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
 
 }
 
