@@ -190,7 +190,7 @@
     	}, 1000);
 
 	$( document ).ready(function() {
-		$.getJSON("js/questions.json", function(json) {
+		$.getJSON("js/questions.json?v=0.1", function(json) {
     		questions=json.questions;
             pages=json.pages;
             createStart();
