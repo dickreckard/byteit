@@ -76,10 +76,9 @@
     <script src="./js/ofxUtils.js"></script>
     <script src="./js/main.js"></script>
 	<script>
-		$('#currentquestion').val('0');
-		arrayq=["0","1","2","3"];
+		$('#currentquestion').val('');
 		userid="+4161231231";
-
+        questionsArray=[];
         function callPages(page,extra){
             if ( page.startsWith("question,")) {
                 extra=page.split(',')[1];
@@ -148,11 +147,13 @@
             $("#context").html('');
             $("#title").html('');
 			$("#questionspace").empty();
-            num=String(questnum);
-            json=questions[num];
-			qn=json.questionNumber;
-			tt=json.mainText;
-			op=json.options;
+            if ( !inArray(questnum,questionsArray) ) {
+                questnum="none";
+            }
+            jsonq=returnQuestion(questnum);
+			qn=jsonq.questionNumber;
+			tt=jsonq.mainText;
+			op=jsonq.options;
 			qid="question"+qn;
 
 			$('#questionspace').append(
@@ -171,6 +172,15 @@
 				sendAnswer(jsonAnswer(userid,qn,this.value));
 			});
 		}
+
+        function returnQuestion(num){
+            $.each(questions, function(i, v) {
+                if (v.questionNumber == num || v.questionNumber == String(num) ) {
+                    thatone=v;
+                }
+            });
+            return thatone;
+        }
 
 		setInterval(function() {
         JSONRPCClient.call('get-text',
@@ -196,6 +206,9 @@
             dataType: "json",
             success: function(json) {
                 questions=json.questions;
+                $.each(questions, function(i, v) {
+                    questionsArray.push(String(questions[i].questionNumber));
+                });
                 pages=json.pages;
                 createStart();  
             }

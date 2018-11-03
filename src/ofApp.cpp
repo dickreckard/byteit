@@ -85,15 +85,18 @@ void ofApp::keyPressed(int key){
             setUserText("question,3");
             break;
         case '4':
+            setUserText("question,4");
+            break;
+        case 'b':
             setUserText("black");
             break;
-        case '5':
+        case 'w':
             setUserText("white");
             break;
-        case '6':
+        case 's':
             setUserText("start");
             break;
-        case '7':
+        case 'c':
             setUserText("image,/img/cat.gif");
             break;
     }
