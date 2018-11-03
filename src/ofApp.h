@@ -19,6 +19,7 @@ public:
     void draw() override;
     void exit() override;
     void keyPressed(int key);
+    void sendFrame(string frame);
 
     // Registered methods.
     void getText(ofx::JSONRPC::MethodArgs& args);

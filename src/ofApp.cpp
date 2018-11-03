@@ -87,6 +87,15 @@ void ofApp::keyPressed(int key){
         case '4':
             setUserText("question,4");
             break;
+        case '5':
+            setUserText("question,5");
+            break;
+        case '6':
+            setUserText("question,6");
+            break;
+        case '7':
+            setUserText("question,7");
+            break;
         case 'b':
             setUserText("black");
             break;
@@ -98,6 +107,9 @@ void ofApp::keyPressed(int key){
             break;
         case 'c':
             setUserText("image,/img/cat.gif");
+            break;
+        case 'f':
+            sendFrame("wtf, how do I make a frame?");
             break;
     }
 }
@@ -135,5 +147,11 @@ void ofApp::setUserText(const std::string& text)
 {
     std::unique_lock<std::mutex> lock(mutex);
     userText = text;
+}
+
+void ofApp::sendFrame(string frame){
+    //    ofxHTTP::WebSocketFrame frame;
+    //    frame.
+    server.webSocketRoute().broadcast(ofxHTTP::WebSocketFrame(frame));
 }
 
