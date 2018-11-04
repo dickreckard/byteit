@@ -21,17 +21,17 @@ public:
     void keyPressed(int key);
 
     // Registered methods.
-    void getText(ofx::JSONRPC::MethodArgs& args);
     void setText(ofx::JSONRPC::MethodArgs& args);
     void getSurveyAnswers(ofx::JSONRPC::MethodArgs& args);
-    void setSurveyPage(ofx::JSONRPC::MethodArgs& args);
+    void setSurveyPage(string page, string extra = NULL);
+    void getCurrentPage(ofx::JSONRPC::MethodArgs& args);
+
+
+    bool is_number(const std::string& s);
+    void ping();
 
     /// \brief The server that handles the JSONRPC requests.
     ofx::HTTP::JSONRPCServer server;
-
-    /// \brief Get the user text in a thread-safe way.
-    /// \returns The user text.
-    std::string getUserText() const;
 
     /// \brief Set the user text in a thread-safe way.
     /// \param text the user text to set.
@@ -44,6 +44,7 @@ private:
     // This piece of text might be modified by multiple client threads.
     // Thus we must use a mutex to protect it during multi-threaded access.
     std::string userText;
+    std::string jsonn;
 
     // We use a mutex to protect any variables that can be
     // modified by multiple clients. In our case, userText must be protected.

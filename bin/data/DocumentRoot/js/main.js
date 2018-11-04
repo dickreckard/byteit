@@ -34,8 +34,15 @@ function onWebSocketOpen(ws) {
 }
 
 function onWebSocketMessage(evt) {
-    console.log("on message:");
-    console.log(evt.data);
+    if ( evt.data.indexOf('jsonrpc') != -1 ) {
+        json = JSON.parse(evt.data);
+    }
+    if ( json.jsonrpc == "no" ){
+        parseSocketMessage(json);
+    } else {
+        console.log("on message:");
+        console.log(evt.data);
+    }
 }
 
 function onWebSocketClose() {
@@ -44,45 +51,6 @@ function onWebSocketClose() {
 
 function onWebSocketError() {
     console.log("on error");
-}
-
-function initializeButtons() {
-    $('#get-text').on('click', function() {
-        var $this = $(this);
-        JSONRPCClient.call('get-text',
-            $('#text-to-recieve').val(),
-            function(result) {
-                $('#text-to-recieve').val(result);
-            },
-            function(error) {
-                addError(error);
-            });
-    });
-
-
-    $('#set-text').on('click', function() {
-        var $this = $(this);
-        JSONRPCClient.call('set-text',
-            $('#text-to-send').val(),
-            function(result) {},
-            function(error) {
-                addError(error);
-            });
-    });
-
-
-    $('#ping').on('click', function() {
-        console.log("pinging");
-        var $this = $(this);
-        JSONRPCClient.notify('ping');
-    });
-
-
-    $('#pong').on('click', function() {
-        console.log("poinging");
-        var $this = $(this);
-        JSONRPCClient.notify('pong');
-    });
 }
 
 $(document).ready(function() {
@@ -95,7 +63,4 @@ $(document).ready(function() {
         onclose: onWebSocketClose,
         onerror: onWebSocketError
     });
-
-    initializeButtons();
-
 });

@@ -79,125 +79,106 @@
 		$('#currentquestion').val('');
 		userid="+4161231231";
         questionsArray=[];
-        function callPages(page,extra){
-            if ( page.startsWith("question,")) {
-                extra=page.split(',')[1];
-                page='question';
+
+    function parseSocketMessage(json){
+        callPages(json.page,json.extra);
+    }
+
+    function callPages(page,extra){
+        switch (page)
+        {
+            case 'questions':
+                createForm(extra);
+            break;
+            case 'start':
+                createStart();
+            break;
+            case 'white':
+                createWhite();
+            break;
+            case 'black':
+                createBlack();
+            break;
+            case 'image':
+                createImage(extra);
+            break;
+            default:
+        }
+    }
+    
+    function createStart(){
+        $("#context").html(pages.start.content);
+        $("#title").html(pages.start.title);
+        $("#questionspace").empty();
+        $('body').css('background-color','transparent');
+        currentPage();
+    }
+
+    function createBlack(){
+        $("#context").html('');
+        $("#title").html('');
+        $("#questionspace").empty();
+        $('body').css('background-color','black');
+    }
+
+    function createWhite(){
+        $("#context").html('');
+        $("#title").html('');
+        $("#questionspace").empty();
+        $('body').css('background-color','white');
+    }
+
+    function createImage(url){
+        url=url||'img/error.jpg';
+        $("#context").html('');
+        $("#title").html('');
+        $("#questionspace").empty();
+        $('body').css('background-color','black');
+        $("#questionspace").append(
+            $('<img>').attr({id:'imago',class:'bigimage',src:url})
+        );
+        $('#imago').on( 'error', function(){ $(this).attr('src','img/error.jpg');});
+    }
+
+	function createForm(questnum){
+        $('body').css('background-color','transparent');
+        $("#context").html('');
+        $("#title").html('');
+		$("#questionspace").empty();
+        if ( !inArray(questnum,questionsArray) ) {
+            questnum="none";
+        }
+        jsonq=returnQuestion(questnum);
+		qn=jsonq.questionNumber;
+		tt=jsonq.mainText;
+		op=jsonq.options;
+		qid="question"+qn;
+
+		$('#questionspace').append(
+			$("<form/>").attr({"id":qid,"name":qid,'class':'question'})
+				.append($("<legend/>").attr({'class':'maintext'}).html(tt))
+		);
+		jqid= $('[name='+qid+']');
+		$.each(op, function (i, opt) {
+			var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
+			var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
+		    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
+		});
+		jqid.wrapInner('<fieldset />');
+
+		$('input[type=radio][name=opt'+qn+']').change(function() {
+			sendAnswer(jsonAnswer(userid,qn,this.value));
+		});
+	}
+
+    function returnQuestion(num){
+        $.each(questions, function(i, v) {
+            if (v.questionNumber == num || v.questionNumber == String(num) ) {
+                thatone=v;
             }
-            if ( page.startsWith("image,")) {
-                extra=page.split(',')[1];
-                page='image';
-            }
-            switch (page)
-            {
-                case 'question':
-                    createForm(extra);
-                break;
-                case 'start':
-                    createStart();
-                break;
-                case 'white':
-                    createWhite();
-                break;
-                case 'black':
-                    createBlack();
-                break;
-                case 'image':
-                    createImage(extra);
-                break;
-                default:
-            }
-        }
-        
-        function createStart(){
-            $("#context").html(pages.start.content);
-            $("#title").html(pages.start.title);
-            $("#questionspace").empty();
-            $('body').css('background-color','transparent');
-        }
-
-        function createBlack(){
-            $("#context").html('');
-            $("#title").html('');
-            $("#questionspace").empty();
-            $('body').css('background-color','black');
-        }
-
-        function createWhite(){
-            $("#context").html('');
-            $("#title").html('');
-            $("#questionspace").empty();
-            $('body').css('background-color','white');
-        }
-
-        function createImage(url){
-            url=url||'img/error.jpg';
-            $("#context").html('');
-            $("#title").html('');
-            $("#questionspace").empty();
-            $('body').css('background-color','black');
-            $("#questionspace").append(
-                $('<img>').attr({id:'imago',class:'bigimage',src:url})
-            );
-            $('#imago').on( 'error', function(){ $(this).attr('src','img/error.jpg');});
-        }
-
-		function createForm(questnum){
-            $('body').css('background-color','transparent');
-            $("#context").html('');
-            $("#title").html('');
-			$("#questionspace").empty();
-            if ( !inArray(questnum,questionsArray) ) {
-                questnum="none";
-            }
-            jsonq=returnQuestion(questnum);
-			qn=jsonq.questionNumber;
-			tt=jsonq.mainText;
-			op=jsonq.options;
-			qid="question"+qn;
-
-			$('#questionspace').append(
-				$("<form/>").attr({"id":qid,"name":qid,'class':'question'})
-					.append($("<legend/>").attr({'class':'maintext'}).html(tt))
-			);
-			jqid= $('[name='+qid+']');
-			$.each(op, function (i, opt) {
-				var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
-				var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
-			    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
-			});
-			jqid.wrapInner('<fieldset />');
-
-			$('input[type=radio][name=opt'+qn+']').change(function() {
-				sendAnswer(jsonAnswer(userid,qn,this.value));
-			});
-		}
-
-        function returnQuestion(num){
-            $.each(questions, function(i, v) {
-                if (v.questionNumber == num || v.questionNumber == String(num) ) {
-                    thatone=v;
-                }
-            });
-            return thatone;
-        }
-
-		setInterval(function() {
-        JSONRPCClient.call('get-text',
-        	$('#currentquestion').val(),
-            function(result) {
-            	if( result ){ 
-            		if ( result != $('#currentquestion').val() ){
-                        console.log('new instruction: ',result);
-            			callPages(result);
-	            		$('#currentquestion').val(result);
-	            	}
-            	} 
-            },
-            function(error) {
-                addError(error);
-            });
-    	}, 1000);
+        });
+        return thatone;
+    }
 
 	$( document ).ready(function() {
         $.ajax({
@@ -236,6 +217,20 @@
         });
 	}
 
+    function currentPage(){
+        JSONRPCClient.call('get-current-page',
+            null,
+            function(result) {
+                console.log('requested current page');
+                if( result ){ 
+                    var json = JSON.parse(result);
+                    parseSocketMessage(json);
+                }
+            },
+            function(error) {
+                addError(error);
+        });
+    }
 
 	</script>
 
