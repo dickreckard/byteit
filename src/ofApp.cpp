@@ -21,7 +21,7 @@ void ofApp::setup()
 
     // Register RPC methods.
     
-    server.registerMethod("getSurveyAnswers", "Receive Survey Answers", this, &ofApp::getSurveyAnswers);
+    server.registerMethod("get-survey-answers", "Receive Survey Answers", this, &ofApp::getSurveyAnswers);
     
     server.registerMethod("get-current-page", "On Startup, get the current page", this, &ofApp::getCurrentPage);
 
@@ -55,6 +55,8 @@ void ofApp::ping()
 void ofApp::getSurveyAnswers(ofx::JSONRPC::MethodArgs& args){
     
     cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
+    std::cout << "Received: " << args.params.dump(4) << endl;
+  // here the answer will be saved to json.
 
 }
 
@@ -120,4 +122,10 @@ void ofApp::setUserText(const std::string& text)
 {
     std::unique_lock<std::mutex> lock(mutex);
     userText = text;
+}
+
+void ofApp::sendFrame(string frame){
+    //    ofxHTTP::WebSocketFrame frame;
+    //    frame.
+    server.webSocketRoute().broadcast(ofxHTTP::WebSocketFrame(frame));
 }

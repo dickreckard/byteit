@@ -18,13 +18,6 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<!--     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">ofx::HTTP::BasicJSONRPCServer Demo</a>
-            </div>
-        </div>
-    </div> -->
 
     <div class="container" id="cont">
         <h1 id="title"></h1>
@@ -33,38 +26,6 @@
         <div id="questionspace">
         </div>
         <br>
-
-        <div class="panel panel-default hide">
-            <div class="panel-body">
-                <div class="pull-left">
-                    <strong>Send Text to the Server (Look for your red and yellow text in the app window)</strong>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group">
-                  <input id="text-to-send" type="text" class="form-control">
-                  <span class="input-group-btn">
-                    <button id="set-text" class="btn btn-default" type="button">Send</button>
-                  </span>
-                </div>
-            </div>
-        </div>
-
-        <div class="panel panel-default hide">
-            <div class="panel-body">
-                <div class="pull-left">
-                    <strong>Get Text from the Server</strong>
-                </div>
-            </div>
-            <div class="panel-footer">
-                <div class="input-group">
-                  <input id="currentquestion" type="text" class="form-control">
-                  <span class="input-group-btn">
-                    <button id="get-text" class="btn btn-default" type="button">Receive</button>
-                  </span>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -209,7 +170,8 @@
 	}
 
 	function sendAnswer(jsonstring){
-		JSONRPCClient.call('set-text',
+        console.log('sending',jsonstring);
+		JSONRPCClient.call('get-survey-answers',
     	jsonstring,
         function(result) {},
         function(error) {
