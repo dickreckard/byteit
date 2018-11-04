@@ -73,7 +73,6 @@ void ofApp::exit()
 
 
 void ofApp::keyPressed(int key){
-<<<<<<< HEAD
     string page="none";
     string extra;
     if ( 47 < key && key < 58 ) {
@@ -95,49 +94,6 @@ void ofApp::keyPressed(int key){
                 extra = "/img/cat.gif";
                 break;
         }
-=======
-    
-    switch (key) {
-        case '0':
-            setUserText("question,0");
-            break;
-        case '1':
-            setUserText("question,1");
-            break;
-        case '2':
-            setUserText("question,2");
-            break;
-        case '3':
-            setUserText("question,3");
-            break;
-        case '4':
-            setUserText("question,4");
-            break;
-        case '5':
-            setUserText("question,5");
-            break;
-        case '6':
-            setUserText("question,6");
-            break;
-        case '7':
-            setUserText("question,7");
-            break;
-        case 'b':
-            setUserText("black");
-            break;
-        case 'w':
-            setUserText("white");
-            break;
-        case 's':
-            setUserText("start");
-            break;
-        case 'c':
-            setUserText("image,/img/cat.gif");
-            break;
-        case 'f':
-            sendFrame("wtf, how do I make a frame?");
-            break;
->>>>>>> a1bb656563aeba69c02989d0100df41aeb8faedd
     }
     if ( page == "none"){
         ofLogVerbose("ofApp::keyPressed") << "The key pressed does not correspond to any page";
@@ -165,13 +121,3 @@ void ofApp::setUserText(const std::string& text)
     std::unique_lock<std::mutex> lock(mutex);
     userText = text;
 }
-<<<<<<< HEAD
-=======
-
-void ofApp::sendFrame(string frame){
-    //    ofxHTTP::WebSocketFrame frame;
-    //    frame.
-    server.webSocketRoute().broadcast(ofxHTTP::WebSocketFrame(frame));
-}
-
->>>>>>> a1bb656563aeba69c02989d0100df41aeb8faedd
