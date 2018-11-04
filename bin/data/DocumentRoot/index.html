@@ -111,7 +111,6 @@
         $("#title").html(pages.start.title);
         $("#questionspace").empty();
         $('body').css('background-color','transparent');
-        currentPage();
     }
 
     function createBlack(){
@@ -192,6 +191,7 @@
                 });
                 pages=json.pages;
                 createStart();  
+                currentPage();
             }
         });
 	});
