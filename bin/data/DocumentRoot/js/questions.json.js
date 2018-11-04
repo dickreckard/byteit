@@ -1,69 +1,152 @@
 questions='[
     { 
+        "questionNumber": 0,
+        "mainText": "Welcome, please answer the following questions",
+        "options": [
+        ]
+    },
+    { 
         "questionNumber": 1,
-        "mainText": "This is the first question",
+        "mainText": "waarom heb je een toegangscode op je telefoon?",
         "options": [
             {
                 "option": "A",
-                "answer": "This is answer 1 A"
+                "answer": "Omdat een toegangscode er standaard op zit"
             },
             {
                 "option": "B",
-                "answer": "This is answer 1 B"
+                "answer": "Omdat ik niemand vertrouw"
             },
             {
                 "option": "C",
-                "answer": "This is answer 1 C"
+                "answer": "Omdat er dingen op mijn telefoon staan die gevaarlijk zouden zijn als die in de verkeerde handen vallen"
             },
             {
                 "option": "D",
-                "answer": "This is answer 1 D"
+                "answer": "Ik heb geen toegangscode want ik heb niets te verbergen"
             }
         ]
     },
-
     { 
+
         "questionNumber": 2,
-        "mainText": "This is the second question",
+        "mainText": "Welke uitspraak past het meest bij jou: “Mijn toegangscode is:”",
         "options": [
             {
                 "option": "A",
-                "answer": "This is answer 2 A"
+                "answer": "1234 of 1111 of 0000 "
             },
             {
                 "option": "B",
-                "answer": "This is answer 2 B"
+                "answer": "Een datum of jaartal van een verjaardag of andere belangrijke gebeurtenis in mijn leven"
             },
             {
                 "option": "C",
-                "answer": "This is answer 2 C"
+                "answer": "Mijn toegangscode is geen getal, maar ik laat mijn telefoon mijn vingerafdruk scannen."
+            }
+        ]
+    },
+    { 
+
+        "questionNumber": 3,
+        "mainText": "Ik heb niets te verbergen omdat:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "Ik toch niks verkeerd doe."
             },
             {
-                "option": "D",
-                "answer": "This is answer 2 D"
+                "option": "B",
+                "answer": "Ik een open boek ben en niet kan liegen"
+            },
+            {
+                "option": "C",
+                "answer": "Geen van beiden, want ik heb wel wat te verbergen."
             }
         ]
     },
 
     { 
-        "questionNumber": 3,
-        "mainText": "This is the third question",
+
+        "questionNumber": 4,
+        "mainText": "Ik heb niets te verbergen voor:",
         "options": [
             {
                 "option": "A",
-                "answer": "This is answer 3 A"
+                "answer": "Mijn ouders."
             },
             {
                 "option": "B",
-                "answer": "This is answer 3 B"
+                "answer": "Mijn beste vrienden"
             },
             {
                 "option": "C",
-                "answer": "This is answer 3 C"
+                "answer": "GMijn vriend/vriendin"
             },
             {
                 "option": "D",
-                "answer": "This is answer 3 D"
+                "answer": "Niemand, want er zijn dingen die ik deel met niemand."
+            }
+        ]
+    },
+    { 
+
+        "questionNumber": 5,
+        "mainText": "Met meer systemen en computers wordt de wereld:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "Eerlijker"
+            },
+            {
+                "option": "B",
+                "answer": "Makkelijker"
+            },
+            {
+                "option": "C",
+                "answer": "Veiliger"
+            }
+        ]
+    },
+    { 
+
+        "questionNumber": 6,
+        "mainText": "Als ik moet kiezen tussen computers of mensen, vertrouw ik meer op:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "Computers, omdat die geen fouten maken."
+            },
+            {
+                "option": "B",
+                "answer": "Mensen, omdat die niet te hacken zijn."
+            },
+            {
+                "option": "C",
+                "answer": "Geen van beiden."
+            }
+        ]
+    },
+    { 
+
+        "questionNumber": 7,
+        "mainText": "Als we meer in systemen en computers gaan vertrouwen wordt de wereld:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "Eerlijker"
+            },
+            {
+                "option": "B",
+                "answer": "Makkelijker"
+            },
+            {
+                "option": "C",
+                "answer": "Veiliger"
+            },
+            {
+                "option": "D",
+                "answer": "Gevaarlijker"
             }
         ]
     }
