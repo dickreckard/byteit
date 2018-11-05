@@ -26,6 +26,7 @@ public:
     void getSurveyAnswers(ofx::JSONRPC::MethodArgs& args);
     void setSurveyPage(string page, string extra = NULL);
     void getCurrentPage(ofx::JSONRPC::MethodArgs& args);
+    void replaceAll(std::string& str, const std::string& from, const std::string& to);
 
 
     bool is_number(const std::string& s);

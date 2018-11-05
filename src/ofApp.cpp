@@ -55,14 +55,20 @@ void ofApp::ping()
 void ofApp::getSurveyAnswers(ofx::JSONRPC::MethodArgs& args){
     
     cout<<"Client Address: " + args.request().clientAddress().toString() + " Server Address: " + args.request().serverAddress().toString() <<endl;
-    std::cout << "Received: " << args.params.dump(4) << endl;
+ 
+    std::string received = args.params.dump(4);
+    // I would parse the JSON here anyway?
+
+    received = args.params.dump(4);
+    replaceAll(received,"\\\"","\"");
+    std::cout << "Received: " << received << endl;
   // here the answer will be saved to json.
 
 }
 
 void ofApp::setSurveyPage(string page, string extra ){
     jsonn = "{\"jsonrpc\":\"no\",\"page\":\"" + page + "\",\"extra\":\"" + extra + "\"}";
-    server.webSocketRoute().broadcast(ofx::HTTP::WebSocketFrame(jsonn));
+    sendFrame(jsonn);
     std::cout << "Broadcast page: " << page << ", " << extra << endl;
 }
 
@@ -128,4 +134,14 @@ void ofApp::sendFrame(string frame){
     //    ofxHTTP::WebSocketFrame frame;
     //    frame.
     server.webSocketRoute().broadcast(ofxHTTP::WebSocketFrame(frame));
+}
+
+void ofApp::replaceAll(std::string& str, const std::string& from, const std::string& to) {
+    if(from.empty())
+        return;
+    size_t start_pos = 0;
+    while((start_pos = str.find(from, start_pos)) != std::string::npos) {
+        str.replace(start_pos, from.length(), to);
+        start_pos += to.length(); // In case 'to' contains 'from', like replacing 'x' with 'yx'
+    }
 }
