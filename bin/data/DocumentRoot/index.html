@@ -104,6 +104,10 @@
         $('body').css('background-color','transparent');
         $("#context").html('');
         $("#title").html('');
+        if ( questnum.indexOf('a')!='-1') {
+            questnum=questnum.slice(0, -1);
+            var answers=true;
+        }
 		$("#questionspace").empty();
         if ( !inArray(questnum,questionsArray) ) {
             questnum="none";
@@ -118,17 +122,19 @@
 			$("<form/>").attr({"id":qid,"name":qid,'class':'question'})
 				.append($("<legend/>").attr({'class':'maintext'}).html(tt))
 		);
-		jqid= $('[name='+qid+']');
-		$.each(op, function (i, opt) {
-			var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
-			var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
-		    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
-		});
-		jqid.wrapInner('<fieldset />');
+        if (answers){
+    		jqid= $('[name='+qid+']');
+    		$.each(op, function (i, opt) {
+    			var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
+    			var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
+    		    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
+    		});
+    		jqid.wrapInner('<fieldset />');
 
-		$('input[type=radio][name=opt'+qn+']').change(function() {
-			sendAnswer(jsonAnswer(userid,qn,this.value));
-		});
+    		$('input[type=radio][name=opt'+qn+']').change(function() {
+    			sendAnswer(jsonAnswer(userid,qn,this.value));
+    		});
+        }
 	}
 
     function returnQuestion(num){
