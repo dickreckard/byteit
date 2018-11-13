@@ -107,6 +107,8 @@
         if ( questnum.indexOf('a')!='-1') {
             questnum=questnum.slice(0, -1);
             var answers=true;
+        }else{
+            var answers=false;
         }
 		$("#questionspace").empty();
         if ( !inArray(questnum,questionsArray) ) {
