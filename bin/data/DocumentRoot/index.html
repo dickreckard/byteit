@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+<div id="eye" ><img src="/img/eye.png"></div>
     <div class="container" id="cont">
         <h1 id="title"></h1>
         <p class="maintext" id="context">
@@ -71,21 +71,21 @@
         $("#context").html(pages.start.content);
         $("#title").html(pages.start.title);
         $("#questionspace").empty();
-        $('body').css('background-color','transparent');
+        $('body').addClass('black').removeClass('white');
     }
 
     function createBlack(){
         $("#context").html('');
         $("#title").html('');
         $("#questionspace").empty();
-        $('body').css('background-color','black');
+        $('body').addClass('black').removeClass('white');
     }
 
     function createWhite(){
         $("#context").html('');
         $("#title").html('');
         $("#questionspace").empty();
-        $('body').css('background-color','white');
+        $('body').removeClass('black').addClass('white');
     }
 
     function createImage(url){
@@ -93,7 +93,7 @@
         $("#context").html('');
         $("#title").html('');
         $("#questionspace").empty();
-        $('body').css('background-color','black');
+        $('body').addClass('black').removeClass('white');
         $("#questionspace").append(
             $('<img>').attr({id:'imago',class:'bigimage',src:url})
         );
@@ -101,7 +101,7 @@
     }
 
 	function createForm(questnum){
-        $('body').css('background-color','transparent');
+        $('body').addClass('black').removeClass('white');
         $("#context").html('');
         $("#title").html('');
         if ( questnum.indexOf('a')!='-1') {
