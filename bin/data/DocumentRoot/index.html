@@ -15,7 +15,7 @@
 <!-- Syntax highlighting. -->
 <link rel="stylesheet" href="css/prism.css">
 <!-- Generic page styles -->
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=0.2">
 </head>
 <body>
 <div id="eye" ><img src="/img/eye.png"></div>
@@ -125,11 +125,13 @@
 				.append($("<legend/>").attr({'class':'maintext'}).html(tt))
 		);
         if (answers){
+            letter='A';
     		jqid= $('[name='+qid+']');
     		$.each(op, function (i, opt) {
     			var radioBtn = $('<input type="radio" />').attr({name:'opt'+qn,id:'opt'+qn+opt.option,value:opt.option}); 
-    			var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(opt.answer);
+    			var radioLabel = $('<label />').attr({'for':'opt'+qn+opt.option}).html(letter+'.&nbsp;&nbsp;&nbsp;'+opt.answer);
     		    jqid.append( $('<div />').attr({'class':'option'}).append( radioBtn, radioLabel ) );
+                letter=String.fromCharCode(letter.charCodeAt() + 1);
     		});
     		jqid.wrapInner('<fieldset />');
 
