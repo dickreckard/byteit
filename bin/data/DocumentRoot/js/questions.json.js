@@ -1,36 +1,30 @@
 questions='[
     { 
         "questionNumber": 0,
-        "mainText": "Welcome, please answer the following questions",
-        "options": [
-        ]
-    },
-    { 
-        "questionNumber": 1,
-        "mainText": "waarom heb je een toegangscode op je telefoon?",
+        "mainText": "ik heb een toegangscode op mijn telefoon omdat:",
         "options": [
             {
                 "option": "A",
-                "answer": "Omdat een toegangscode er standaard op zit"
+                "answer": "die er standaard op zit"
             },
             {
                 "option": "B",
-                "answer": "Omdat ik niemand vertrouw"
+                "answer": "ik niemand vertrouw"
             },
             {
                 "option": "C",
-                "answer": "Omdat er dingen op mijn telefoon staan die gevaarlijk zouden zijn als die in de verkeerde handen vallen"
+                "answer": "er dingen op mijn telefoon staan die gevaarlijk zouden zijn als die in de verkeerde handen vallen"
             },
             {
                 "option": "D",
-                "answer": "Ik heb geen toegangscode want ik heb niets te verbergen"
+                "answer": "ik heb geen toegangscode want ik heb niets te verbergen"
             }
         ]
     },
     { 
 
-        "questionNumber": 2,
-        "mainText": "Welke uitspraak past het meest bij jou: “Mijn toegangscode is:”",
+        "questionNumber": 1,
+        "mainText": "mijn toegangscode is:",
         "options": [
             {
                 "option": "A",
@@ -38,115 +32,100 @@ questions='[
             },
             {
                 "option": "B",
-                "answer": "Een datum of jaartal van een verjaardag of andere belangrijke gebeurtenis in mijn leven"
+                "answer": "een datum of jaartal van een verjaardag of andere belangrijke gebeurtenis in mijn leven"
             },
             {
                 "option": "C",
-                "answer": "Mijn toegangscode is geen getal, maar ik laat mijn telefoon mijn vingerafdruk scannen."
+                "answer": "een random getal of een figuurtje"
+            },
+            
+                "option": "D",
+                "answer": "mijn toegangscode is geen getal, maar ik laat mijn telefoon mijn vingerafdruk scannen"
             }
         ]
     },
+    { 
+
+        "questionNumber": 2,
+        "mainText": "ik heb niets te verbergen omdat:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "ik toch niks verkeerd doe"
+            },
+            {
+                "option": "B",
+                "answer": "ik een open boek ben en niet kan liegen"
+            },
+            {
+                "option": "C",
+                "answer": "geen van beiden, want ik heb wel wat te verbergen"
+            }
+        ]
+    },
+
     { 
 
         "questionNumber": 3,
-        "mainText": "Ik heb niets te verbergen omdat:",
+        "mainText": "ik heb niets te verbergen voor:",
         "options": [
             {
                 "option": "A",
-                "answer": "Ik toch niks verkeerd doe."
+                "answer": "mijn ouders"
             },
             {
                 "option": "B",
-                "answer": "Ik een open boek ben en niet kan liegen"
+                "answer": "mijn beste vrienden"
             },
             {
                 "option": "C",
-                "answer": "Geen van beiden, want ik heb wel wat te verbergen."
-            }
-        ]
-    },
-
-    { 
-
-        "questionNumber": 4,
-        "mainText": "Ik heb niets te verbergen voor:",
-        "options": [
-            {
-                "option": "A",
-                "answer": "Mijn ouders."
-            },
-            {
-                "option": "B",
-                "answer": "Mijn beste vrienden"
-            },
-            {
-                "option": "C",
-                "answer": "GMijn vriend/vriendin"
+                "answer": "mijn vriendje of vriendinnetje"
             },
             {
                 "option": "D",
-                "answer": "Niemand, want er zijn dingen die ik deel met niemand."
+                "answer": "niemand, want er zijn dingen die ik deel met niemand"
+            }
+        ]
+    },
+    { 
+
+        "questionNumber": 4,
+        "mainText": "als ik moet kiezen tussen computers of mensen, vertrouw ik meer op:",
+        "options": [
+            {
+                "option": "A",
+                "answer": "computers, omdat die geen fouten maken."
+            },
+            {
+                "option": "B",
+                "answer": "mensen, omdat die niet te hacken zijn."
+            },
+            {
+                "option": "C",
+                "answer": "geen van beiden."
             }
         ]
     },
     { 
 
         "questionNumber": 5,
-        "mainText": "Met meer systemen en computers wordt de wereld:",
+        "mainText": "hoe ongemakkelijk maakte deze test je?",
         "options": [
             {
                 "option": "A",
-                "answer": "Eerlijker"
+                "answer": "geen probleem"
             },
             {
                 "option": "B",
-                "answer": "Makkelijker"
+                "answer": "niet leuk"
             },
             {
                 "option": "C",
-                "answer": "Veiliger"
-            }
-        ]
-    },
-    { 
-
-        "questionNumber": 6,
-        "mainText": "Als ik moet kiezen tussen computers of mensen, vertrouw ik meer op:",
-        "options": [
-            {
-                "option": "A",
-                "answer": "Computers, omdat die geen fouten maken."
-            },
-            {
-                "option": "B",
-                "answer": "Mensen, omdat die niet te hacken zijn."
-            },
-            {
-                "option": "C",
-                "answer": "Geen van beiden."
-            }
-        ]
-    },
-    { 
-
-        "questionNumber": 7,
-        "mainText": "Als we meer in systemen en computers gaan vertrouwen wordt de wereld:",
-        "options": [
-            {
-                "option": "A",
-                "answer": "Eerlijker"
-            },
-            {
-                "option": "B",
-                "answer": "Makkelijker"
-            },
-            {
-                "option": "C",
-                "answer": "Veiliger"
+                "answer": "heel ongemakkelijk"
             },
             {
                 "option": "D",
-                "answer": "Gevaarlijker"
+                "answer": "overal zweetplekken"
             }
         ]
     }
