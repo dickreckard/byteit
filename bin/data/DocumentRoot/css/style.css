@@ -136,6 +136,7 @@ float:right;
 	height:100%;
 	max-height: 1080px;
 }
-/*
- * http://stackoverflow.com/questions/11223615/how-to-use-font-awesome-for-checkboxes-etc
- */
+
+legend{
+    border: 0;
+}
